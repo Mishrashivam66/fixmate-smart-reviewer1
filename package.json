@@ -1,0 +1,39 @@
+{
+  "name": "ai-code-reviewer",
+  "displayName": "AI Code Review (FixMate)",
+  "description": "AI-powered code review and fixing assistant",
+  "version": "0.0.2",
+  "publisher": "shivamkumar7899",
+  "engines": {
+    "vscode": "^1.107.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:fixmate.reviewProject"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "fixmate.reviewProject",
+        "title": "FixMate: Review Project"
+      }
+    ],
+    "configuration": {
+      "title": "FixMate",
+      "properties": {
+        "fixmate.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Gemini API Key for FixMate"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@google/genai": "^1.34.0",
+    "dotenv": "^17.2.3"
+  }
+}

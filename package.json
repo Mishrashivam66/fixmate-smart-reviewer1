@@ -2,7 +2,7 @@
   "name": "fixmate-smart-reviewer",
   "displayName": "fixmate smart reviewer",
   "description": "AI-powered code review and fixing assistant",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "publisher": "shivamkumar7899",
   "engines": {
     "vscode": "^1.107.0"
@@ -37,7 +37,7 @@
     "dotenv": "^17.2.3"
   },
   "scripts": {
-   "build": "esbuild agent.mjs --bundle --platform=node --format=esm --outfile=dist/agent.js"
+    "build": "esbuild agent.mjs --bundle --platform=node --format=esm --outfile=dist/agent.js"
   },
   "devDependencies": {
     "esbuild": "^0.27.2"

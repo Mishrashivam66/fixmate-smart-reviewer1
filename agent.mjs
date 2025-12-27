@@ -10,7 +10,7 @@ import path from "path";
 const apiKey = process.env.GEMINI_API_KEY;
 
 if (!apiKey) {
-  console.error("❌ GEMINI_API_KEY not provided");
+  console.error(" GEMINI_API_KEY not provided");
   process.exit(1);
 }
 
@@ -210,7 +210,7 @@ Tasks:
 const targetDir = process.argv[2];
 
 if (!targetDir) {
-  console.error("❌ No directory provided");
+  console.error("No directory provided");
   process.exit(1);
 }
 

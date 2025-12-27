@@ -1,9 +1,9 @@
 {
-  "name": "ai-code-reviewer",
-  "displayName": "AI Code Review (FixMate)",
+  "name": "fixmate-smart-reviewer",
+  "displayName": "fixmate smart reviewer",
   "description": "AI-powered code review and fixing assistant",
   "version": "0.0.10",
-  "publisher": "fixmate-ai",
+  "publisher": "shivamkumar7899",
   "engines": {
     "vscode": "^1.107.0"
   },
@@ -35,5 +35,11 @@
   "dependencies": {
     "@google/genai": "^1.34.0",
     "dotenv": "^17.2.3"
+  },
+  "scripts": {
+   "build": "esbuild agent.mjs --bundle --platform=node --format=esm --outfile=dist/agent.js"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.2"
   }
 }

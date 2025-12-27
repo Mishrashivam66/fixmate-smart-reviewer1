@@ -2,7 +2,7 @@
   "name": "ai-code-reviewer",
   "displayName": "AI Code Review (FixMate)",
   "description": "AI-powered code review and fixing assistant",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "publisher": "fixmate-ai",
   "engines": {
     "vscode": "^1.107.0"

@@ -45,8 +45,8 @@ function activate(context) {
 
         outputChannel.clear();
         outputChannel.show(true);
-        outputChannel.appendLine("🔍 FixMate started...");
-        outputChannel.appendLine(`📂 Project: ${projectPath}\n`);
+        outputChannel.appendLine(" FixMate started...");
+        outputChannel.appendLine(`Project: ${projectPath}\n`);
 
         // 4️⃣ Spawn agent
         const child = spawn("node", [agentPath, projectPath], {
@@ -64,7 +64,7 @@ function activate(context) {
 
         // 6️⃣ STDERR
         child.stderr.on("data", (data) => {
-          outputChannel.appendLine("\n❌ ERROR:");
+          outputChannel.appendLine("\n ERROR:");
           outputChannel.append(data.toString());
         });
 
@@ -72,10 +72,10 @@ function activate(context) {
         child.on("close", (code) => {
           if (code === 0) {
             outputChannel.appendLine(
-              "\n✅ FixMate review completed successfully."
+              "\n FixMate review completed successfully."
             );
           } else {
-            outputChannel.appendLine(`\n⚠️ FixMate exited with code ${code}`);
+            outputChannel.appendLine(`\n FixMate exited with code ${code}`);
           }
         });
       } catch (err) {

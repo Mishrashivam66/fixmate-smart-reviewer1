@@ -1,5 +1,4 @@
 const vscode = require("vscode");
-const path = require("path");
 const { spawn } = require("child_process");
 
 /**
@@ -8,7 +7,6 @@ const { spawn } = require("child_process");
 function activate(context) {
   console.log("FixMate extension is now active!");
 
-  // 🔹 Output channel (one time)
   const outputChannel = vscode.window.createOutputChannel("FixMate");
 
   const disposable = vscode.commands.registerCommand(
@@ -30,38 +28,47 @@ function activate(context) {
 
         const projectPath = folderUri[0].fsPath;
 
-        // 2️⃣ agent.mjs path
-        const agentPath = path.join(context.extensionPath, "agent.mjs");
+        // 2️⃣ API key check
+        const apiKey = vscode.workspace
+          .getConfiguration("fixmate")
+          .get("apiKey");
+
+        if (!apiKey) {
+          vscode.window.showErrorMessage(
+            "FixMate: Please set your Gemini API key in Settings."
+          );
+          return;
+        }
+
+        // 3️⃣ Bundled agent path
+        const agentPath = context.asAbsolutePath("dist/agent.js");
 
         outputChannel.clear();
         outputChannel.show(true);
         outputChannel.appendLine("🔍 FixMate started...");
         outputChannel.appendLine(`📂 Project: ${projectPath}\n`);
 
-        // 3️⃣ Spawn Node process
+        // 4️⃣ Spawn agent
         const child = spawn("node", [agentPath, projectPath], {
           cwd: context.extensionPath,
           env: {
             ...process.env,
-            GEMINI_API_KEY: vscode.workspace
-              .getConfiguration("fixmate")
-              .get("apiKey"),
+            GEMINI_API_KEY: apiKey,
           },
-          shell: true,
         });
 
-        // 4️⃣ STDOUT
+        // 5️⃣ STDOUT
         child.stdout.on("data", (data) => {
           outputChannel.append(data.toString());
         });
 
-        // 5️⃣ STDERR
+        // 6️⃣ STDERR
         child.stderr.on("data", (data) => {
           outputChannel.appendLine("\n❌ ERROR:");
           outputChannel.append(data.toString());
         });
 
-        // 6️⃣ Process close
+        // 7️⃣ Exit code
         child.on("close", (code) => {
           if (code === 0) {
             outputChannel.appendLine(
